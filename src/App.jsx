@@ -1,174 +1,123 @@
-import { useState, useEffect } from 'react';
-import {
-	AppShell,
-	Group,
-	Text,
-	Button,
-	Container,
-	Title,
-	Badge,
-	Box,
-	Tooltip,
-	ActionIcon,
-} from '@mantine/core';
-import {
-	IconCoin,
-	IconBell,
-	IconSettings,
-	IconBrandGithub,
-	IconExternalLink,
-} from '@tabler/icons-react';
+import React from 'react';
+import { AppShell, Container, Group, Text, ActionIcon, Tooltip, Badge } from '@mantine/core';
+import { IconBrandGithub, IconSettings, IconBell } from '@tabler/icons-react';
+import { Notifications } from '@mantine/notifications';
+
+// Components
+import HeroSection from './components/layout/HeroSection';
 import DashboardGrid from './components/dashboard/DashboardGrid';
 import AlertModal from './components/alerts/AlertModal';
-import useCryptoStore from './stores/useCryptoStore';
+import NotificationBanner from './components/ui/NotificationBanner';
+
+// Hooks and stores
 import useAlertStore from './stores/useAlertStore';
-import useNotifications from './hooks/useNotifications.jsx';
-import useAlertInitialization from './hooks/useAlertInitialization';
+import useCryptoStore from './stores/useCryptoStore';
+import { useAlertInitialization } from './hooks/useAlertInitialization';
+
+// Styles
+import './App.css';
 
 function App() {
-	const { notifications, addNotification, validateAllData } = useCryptoStore();
-	const { getActiveAlerts } = useAlertStore();
+  const { alerts, isInitialized } = useAlertStore();
+  const { addNotification } = useCryptoStore();
 
-	// Initialize notification system
-	useNotifications();
+  // Initialize alerts system
+  useAlertInitialization();
 
-	// Initialize alert system with persistence
-	const { isInitialized, activeAlertsCount } = useAlertInitialization();
+  const activeAlertsCount = alerts.filter(alert => alert.isActive).length;
 
-	// REAL DATA ONLY - Welcome notification
-	useEffect(() => {
-		const timer = setTimeout(() => {
-			addNotification({
-				type: 'success',
-				title: '🚀 CryptoGuard v6.0 - Real Data Only!',
-				message: 'Now using 100% real LunarCrush API data. No more mock data!',
-			});
+  const handleViewGitHub = () => {
+    window.open('https://github.com/danilobatson/crypto-alert-system', '_blank');
+  };
 
-			// Validate all data is real
-			validateAllData();
-		}, 1000);
+  return (
+    <>
+      <AppShell
+        header={{ height: 70 }}
+        padding={0}
+        style={{
+          background: 'linear-gradient(135deg, #0f172a 0%, #1e293b 100%)',
+          minHeight: '100vh'
+        }}
+      >
+        <AppShell.Header
+          style={{
+            background: 'rgba(15, 23, 42, 0.95)',
+            backdropFilter: 'blur(10px)',
+            borderBottom: '1px solid rgba(255, 255, 255, 0.1)'
+          }}
+        >
+          <Container size="xl" h="100%">
+            <Group justify="space-between" h="100%">
+              <Group>
+                <Text
+                  size="xl"
+                  weight={900}
+                  style={{
+                    background: 'linear-gradient(45deg, #3b82f6, #06b6d4)',
+                    backgroundClip: 'text',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent'
+                  }}
+                >
+                  🚀 CryptoGuard
+                </Text>
+                <Badge variant="outline" color="blue" size="sm">
+                  Live Demo
+                </Badge>
+              </Group>
 
-		return () => clearTimeout(timer);
-	}, [addNotification, validateAllData]);
+              <Group spacing="md">
+                {/* Active Alerts Badge */}
+                {isInitialized && activeAlertsCount > 0 && (
+                  <Tooltip label={`${activeAlertsCount} active alerts monitoring prices`}>
+                    <Badge
+                      variant="light"
+                      color={activeAlertsCount > 0 ? 'orange' : 'blue'}
+                      leftSection={<IconBell size={12} />}
+                      size="lg"
+                    >
+                      {activeAlertsCount} alerts
+                    </Badge>
+                  </Tooltip>
+                )}
 
-	const handleSetupAlerts = () => {
-		addNotification({
-			type: 'info',
-			title: 'Real Alert System Active',
-			message: 'Create alerts with real-time LunarCrush data!',
-		});
-	};
+                {/* GitHub Link */}
+                <Tooltip label="View source code">
+                  <ActionIcon
+                    variant="light"
+                    color="gray"
+                    size="lg"
+                    onClick={handleViewGitHub}
+                  >
+                    <IconBrandGithub size={18} />
+                  </ActionIcon>
+                </Tooltip>
+              </Group>
+            </Group>
+          </Container>
+        </AppShell.Header>
 
-	const handleViewGitHub = () => {
-		addNotification({
-			type: 'info',
-			title: 'Cursor vs Windsurf IDE Battle',
-			message: 'Source code available after the AI IDE comparison is complete!',
-		});
-	};
+        <AppShell.Main>
+          {/* Hero Section */}
+          <HeroSection />
+          
+          {/* Notification Banner */}
+          <NotificationBanner />
+          
+          {/* Main Dashboard */}
+          <div id="dashboard" style={{ paddingTop: '40px', paddingBottom: '40px' }}>
+            <Container size="xl">
+              <DashboardGrid />
+            </Container>
+          </div>
+        </AppShell.Main>
+      </AppShell>
 
-	return (
-		<>
-			<AppShell padding='md'>
-				<AppShell.Header height={70}>
-					<Container size='xl' h='100%'>
-						<Group h='100%' justify='space-between' align='center'>
-							{/* Logo Section */}
-							<Group gap='md'>
-								<Box
-									style={{
-										background:
-											'linear-gradient(135deg, #F7931A 0%, #FFB84D 100%)',
-										borderRadius: '12px',
-										padding: '8px',
-										display: 'flex',
-										alignItems: 'center',
-										justifyContent: 'center',
-									}}>
-									<IconCoin size={28} color='white' />
-								</Box>
-
-								<Box>
-									<Title order={2} size='h3' fw={700} c='white'>
-										CryptoGuard
-									</Title>
-								</Box>
-							</Group>
-
-							{/* Center Section - Connection Status */}
-
-							{/* Right Section */}
-							<Group gap='md'>
-								{/* Alert Counter */}
-								{activeAlertsCount > 0 && (
-									<Tooltip
-										label={`${activeAlertsCount} active alerts monitoring real prices`}>
-										<Badge
-											variant='filled'
-											color={activeAlertsCount > 3 ? 'orange' : 'blue'}
-											leftSection={<IconBell size={12} />}
-											size='lg'>
-											{activeAlertsCount} real alerts
-										</Badge>
-									</Tooltip>
-								)}
-
-								{/* Storage Status Indicator */}
-								{isInitialized && (
-									<Tooltip label='Alerts are saved and will persist across browser sessions'>
-										<Badge variant='light' color='green' size='sm'>
-											💾 Saved
-										</Badge>
-									</Tooltip>
-								)}
-
-
-                
-
-								{/* Settings */}
-								<Tooltip label='Settings'>
-									<ActionIcon
-										variant='light'
-										color='gray'
-										size='lg'
-										onClick={() =>
-											addNotification({
-												type: 'info',
-												title: 'Settings',
-												message:
-													'Advanced settings panel coming in next update!',
-											})
-										}>
-										<IconSettings size={18} />
-									</ActionIcon>
-								</Tooltip>
-
-								{/* GitHub */}
-								<Tooltip label='View source code'>
-									<ActionIcon
-										variant='light'
-										color='gray'
-										size='lg'
-										onClick={handleViewGitHub}>
-										<IconBrandGithub size={18} />
-									</ActionIcon>
-								</Tooltip>
-							</Group>
-						</Group>
-					</Container>
-				</AppShell.Header>
-
-				<AppShell.Main>
-					<Container size='xl'>
-						<DashboardGrid />
-					</Container>
-				</AppShell.Main>
-			</AppShell>
-
-			{/* Alert Modal - Rendered globally */}
-			<AlertModal />
-		</>
-	);
+      {/* Alert Modal - Rendered globally */}
+      <AlertModal />
+    </>
+  );
 }
 
 export default App;
