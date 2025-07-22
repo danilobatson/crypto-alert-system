@@ -325,7 +325,8 @@ const PriceChart = ({ symbol, data, isRealTime = false }) => {
       className={isRealTime ? "pulse-live" : ""}
       style={{
         backgroundColor: 'rgba(255, 255, 255, 0.05)',
-        border: isRealTime ? '1px solid rgba(64, 192, 87, 0.3)' : '1px solid rgba(255, 255, 255, 0.1)'
+        border: isRealTime ? '1px solid rgba(64, 192, 87, 0.3)' : '1px solid rgba(255, 255, 255, 0.1)',
+        marginBottom: 20,
       }}
     >
       <Stack gap="md">
