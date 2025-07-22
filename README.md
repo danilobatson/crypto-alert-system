@@ -13,7 +13,7 @@ A production-ready cryptocurrency alert system with real-time price monitoring, 
 **Perfect for demonstrating modern frontend and real-time system skills:**
 
 - 🔔 **Real-Time Alerts**: Browser notifications with 11 alert types
-- 📊 **Live Crypto Data**: Bitcoin ($119K+), Ethereum, and market metrics via LunarCrush API
+- 📊 **Live Crypto Data**: Bitcoin and Ethereum market metrics via LunarCrush API
 - 🎨 **Professional UI**: Mantine 8.2.1 with glassmorphism design and dark theme
 - 📱 **Mobile-First**: Responsive design optimized for all devices
 - ⚡ **Performance**: Zustand + React Query for optimal state management
@@ -26,7 +26,7 @@ A production-ready cryptocurrency alert system with real-time price monitoring, 
 **Try it now:** [Crypto Alert System](https://crypto-alert-system.pages.dev/)
 
 **Features to test:**
-- View live Bitcoin and Ethereum prices
+- View live Bitcoin and Ethereum metrics
 - Create price alerts with browser notifications
 - Experience professional glassmorphism UI
 - Test mobile responsive design
@@ -63,7 +63,6 @@ A production-ready cryptocurrency alert system with real-time price monitoring, 
 
 - Live Bitcoin, Ethereum, and cryptocurrency prices
 - 30-second polling with pause/resume functionality
-- Visual data freshness indicators (FRESH/RECENT/STALE)
 - Connection status monitoring with automatic reconnection
 
 ### **🚨 Smart Alert System**
@@ -75,7 +74,7 @@ A production-ready cryptocurrency alert system with real-time price monitoring, 
 
 ### **📊 Professional Dashboard**
 
-- **Live Price Cards**: Bitcoin, Ethereum with 24h changes
+- **Live Price Cards**: Bitcoin and  Ethereum with 24h changes
 - **Market Metrics**: Volume, market cap, percentage changes
 - **Alert Management**: Create, view, disable, and delete alerts
 - **Error Recovery**: Production-ready error boundaries and user feedback
