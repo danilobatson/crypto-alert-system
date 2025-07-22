@@ -11,8 +11,9 @@ import '@mantine/notifications/styles.css'
 // Import app styles
 import './index.css'
 import App from './App.jsx'
+import ErrorBoundary from './components/ui/ErrorBoundary.jsx'
 
-// Create React Query client
+// Create React Query client with production-ready settings
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -20,22 +21,28 @@ const queryClient = new QueryClient({
       cacheTime: 300000, // 5 minutes
       retry: 3,
       refetchOnWindowFocus: false,
+      refetchOnReconnect: true,
+    },
+    mutations: {
+      retry: 1,
     },
   },
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <MantineProvider 
-        theme={{
-          colorScheme: 'dark',
-          primaryColor: 'blue',
-        }}
-      >
-        <Notifications position="top-right" />
-        <App />
-      </MantineProvider>
-    </QueryClientProvider>
+    <ErrorBoundary>
+      <QueryClientProvider client={queryClient}>
+        <MantineProvider 
+          theme={{
+            colorScheme: 'dark',
+            primaryColor: 'blue',
+          }}
+        >
+          <Notifications position="top-right" limit={3} />
+          <App />
+        </MantineProvider>
+      </QueryClientProvider>
+    </ErrorBoundary>
   </React.StrictMode>,
 )
