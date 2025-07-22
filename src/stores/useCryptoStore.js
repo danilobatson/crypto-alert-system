@@ -182,7 +182,6 @@ if (typeof window !== 'undefined') {
     const store = useCryptoStore.getState()
     store.setCryptoData('test', { price: 12345, source: 'test', isReal: true })
   }
-  console.log('🔧 Debug tools: window.debugCryptoStore() | window.testStoreUpdate()')
 }
 
 export default useCryptoStore
