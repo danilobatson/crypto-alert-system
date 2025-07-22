@@ -1,0 +1,458 @@
+/* Global Dark Theme Enforcement */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #0F172A !important;
+  color: white !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+#root {
+  background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%) !important;
+  min-height: 100vh;
+  color: white !important;
+}
+
+/* Force dark theme on Mantine components */
+.mantine-Card-root {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.mantine-Text-root {
+  color: white !important;
+}
+
+.mantine-Badge-root {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.mantine-Button-root {
+  color: white !important;
+}
+
+/* Skeleton animations */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+/* Loading states */
+.skeleton-loading {
+  animation: skeleton-pulse 2s ease-in-out infinite;
+}
+
+.shimmer-effect {
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* Smooth transitions */
+.crypto-card-loading {
+  opacity: 0.8;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+/* Fix any remaining light elements */
+[data-mantine-color-scheme="light"] {
+  --mantine-color-body: #0F172A !important;
+  --mantine-color-text: white !important;
+}
+
+
+/* Fix Mantine Select Dropdown Visibility */
+.mantine-Select-dropdown,
+.mantine-Combobox-dropdown {
+  background: rgba(30, 41, 59, 0.95) !important;
+  backdrop-filter: blur(20px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4) !important;
+}
+
+.mantine-Select-option,
+.mantine-Combobox-option {
+  background: transparent !important;
+  color: white !important;
+  padding: 12px 16px !important;
+  border-radius: 8px !important;
+  margin: 4px 8px !important;
+  transition: all 0.2s ease !important;
+}
+
+.mantine-Select-option:hover,
+.mantine-Combobox-option:hover,
+.mantine-Select-option[data-selected],
+.mantine-Combobox-option[data-selected] {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+}
+
+.mantine-Select-option[data-combobox-selected],
+.mantine-Combobox-option[data-combobox-selected] {
+  background: rgba(247, 147, 26, 0.2) !important;
+  color: #F7931A !important;
+}
+
+/* Fix Select Input */
+.mantine-Select-input,
+.mantine-Combobox-input {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border-radius: 8px !important;
+}
+
+.mantine-Select-input:focus,
+.mantine-Combobox-input:focus {
+  border-color: #F7931A !important;
+  box-shadow: 0 0 0 2px rgba(247, 147, 26, 0.3) !important;
+}
+
+.mantine-Select-input::placeholder,
+.mantine-Combobox-input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Fix dropdown arrow */
+.mantine-Select-rightSection svg,
+.mantine-Combobox-rightSection svg {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Fix SegmentedControl */
+.mantine-SegmentedControl-root {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 12px !important;
+}
+
+.mantine-SegmentedControl-control {
+  color: rgba(255, 255, 255, 0.7) !important;
+  border-radius: 8px !important;
+}
+
+.mantine-SegmentedControl-control[data-active] {
+  background: linear-gradient(135deg, #F7931A 0%, #FB923C 100%) !important;
+  color: white !important;
+  box-shadow: 0 4px 16px rgba(247, 147, 26, 0.4) !important;
+}
+
+/* Fix Tabs */
+.mantine-Tabs-tab {
+  color: rgba(255, 255, 255, 0.7) !important;
+  transition: all 0.2s ease !important;
+}
+
+.mantine-Tabs-tab:hover {
+  color: #1a1a1a !important; /* Dark text on white background */
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.mantine-Tabs-tab[data-active="true"] {
+  color: #3B82F6 !important; /* Keep active tab blue */
+  background-color: rgba(59, 130, 246, 0.1) !important;
+}
+
+.mantine-Tabs-tab[data-active="true"]:hover {
+  color: #ffffff !important; /* White text when hovering active tab */
+  background-color: #3B82F6 !important; /* Full blue background */
+}
+
+/* Clean tab list styling */
+.mantine-Tabs-list {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  margin-bottom: 1rem !important;
+}
+
+
+
+
+/* ===== SOPHISTICATED MICRO-INTERACTIONS ===== */
+
+/* Card Hover Effects */
+.crypto-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.crypto-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Button Hover Effects */
+.enhanced-button {
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.enhanced-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(247, 147, 26, 0.4);
+}
+
+.enhanced-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.enhanced-button:hover::before {
+  left: 100%;
+}
+
+/* Icon Spin Effect */
+.icon-spin {
+  transition: transform 0.3s ease;
+}
+
+.icon-spin:hover {
+  transform: rotate(180deg);
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-10px) rotate(2deg); }
+}
+
+.floating {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* Pulse Effect */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(247, 147, 26, 0.3);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(247, 147, 26, 0.6);
+    transform: scale(1.05);
+  }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Slide Up Animation */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+/* Stagger Animation */
+.stagger-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.6s ease-out forwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0.1s; }
+.stagger-item:nth-child(2) { animation-delay: 0.2s; }
+.stagger-item:nth-child(3) { animation-delay: 0.3s; }
+.stagger-item:nth-child(4) { animation-delay: 0.4s; }
+
+/* Gradient Border Animation */
+@keyframes gradient-border {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-border {
+  background: linear-gradient(45deg, #F7931A, #FB923C, #F7931A);
+  background-size: 200% 200%;
+  animation: gradient-border 3s ease infinite;
+  padding: 2px;
+  border-radius: 12px;
+}
+
+.gradient-border > * {
+  border-radius: 10px;
+  background: rgba(30, 41, 59, 0.95);
+}
+
+/* Loading Shimmer Enhanced */
+@keyframes shimmer-enhanced {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.shimmer-enhanced {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 25%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.1) 75%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer-enhanced 2s infinite;
+}
+
+/* ===== HERO SECTION ENHANCEMENTS ===== */
+
+.hero-section {
+  animation: slideUp 0.8s ease-out forwards;
+  transition: all 0.3s ease;
+}
+
+.hero-section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced floating animation with different speeds */
+.floating:nth-child(1) {
+  animation: float 8s ease-in-out infinite;
+}
+
+.floating:nth-child(2) {
+  animation: float 12s ease-in-out infinite reverse;
+}
+
+/* Ring progress hover effect */
+.mantine-RingProgress-root {
+  transition: transform 0.3s ease;
+}
+
+.mantine-RingProgress-root:hover {
+  transform: scale(1.1);
+}
+
+/* Enhanced gradient borders */
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2px;
+  background: linear-gradient(45deg, #F7931A, #3B82F6, #10B981, #A855F7, #F7931A);
+  background-size: 300% 300%;
+  border-radius: 24px;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: gradient-border 4s ease infinite;
+  z-index: -1;
+}
+
+/* Stagger delay variations for hero elements */
+.hero-section .stagger-item:nth-child(1) { animation-delay: 0.2s; }
+.hero-section .stagger-item:nth-child(2) { animation-delay: 0.4s; }
+.hero-section .stagger-item:nth-child(3) { animation-delay: 0.6s; }
+.hero-section .stagger-item:nth-child(4) { animation-delay: 0.8s; }
+
+
+/* ===== HERO SECTION ENHANCEMENTS ===== */
+
+.hero-section {
+  animation: slideUp 0.8s ease-out forwards;
+  transition: all 0.3s ease;
+}
+
+.hero-section:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+}
+
+/* Enhanced floating animation with different speeds */
+.floating:nth-child(1) {
+  animation: float 8s ease-in-out infinite;
+}
+
+.floating:nth-child(2) {
+  animation: float 12s ease-in-out infinite reverse;
+}
+
+/* Ring progress hover effect */
+.mantine-RingProgress-root {
+  transition: transform 0.3s ease;
+}
+
+.mantine-RingProgress-root:hover {
+  transform: scale(1.1);
+}
+
+/* Enhanced gradient borders */
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 2px;
+  background: linear-gradient(45deg, #F7931A, #3B82F6, #10B981, #A855F7, #F7931A);
+  background-size: 300% 300%;
+  border-radius: 24px;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  animation: gradient-border 4s ease infinite;
+  z-index: -1;
+}
+
+/* Stagger delay variations for hero elements */
+.hero-section .stagger-item:nth-child(1) { animation-delay: 0.2s; }
+.hero-section .stagger-item:nth-child(2) { animation-delay: 0.4s; }
+.hero-section .stagger-item:nth-child(3) { animation-delay: 0.6s; }
+.hero-section .stagger-item:nth-child(4) { animation-delay: 0.8s; }
+
+/* Real-time pulse animation */
+@keyframes pulse-animation {
+  0% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+  50% { 
+    opacity: 0.6; 
+    transform: scale(1.1); 
+  }
+  100% { 
+    opacity: 1; 
+    transform: scale(1); 
+  }
+}
+
+.pulse-live {
+  animation: pulse-animation 2s infinite;
+}
+
+.pulse-dot {
+  animation: pulse-animation 2s infinite;
+  color: #ff4444;
+}
