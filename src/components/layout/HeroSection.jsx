@@ -130,9 +130,8 @@ const HeroSection = () => {
 								lineHeight: 1.6,
 								padding: { base: '0 10px', md: '0' },
 							}}>
-							Get instant browser notifications when Bitcoin, Ethereum, or any
-							crypto hits your price targets. Built LunarCrush API for real-time
-							accuracy.
+							Get browser notifications when Bitcoin and/or hits Ethereum when a coin hits your price targets. Built LunarCrush API for real-time
+							accuracy. Alerts are checked every 30 seconds or on  refreshed data from the Live Dashboard.
 						</Text>
 					</Stack>
 
