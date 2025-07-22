@@ -11,13 +11,12 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
-    "@mantine/charts": "^8.2.1",
-    "@mantine/core": "^7.3.2",
+    "@mantine/core": "^7.17.8",
     "@mantine/dates": "^8.2.1",
     "@mantine/dropzone": "^8.2.1",
-    "@mantine/hooks": "^7.3.2",
+    "@mantine/hooks": "^7.17.8",
     "@mantine/modals": "^8.2.1",
-    "@mantine/notifications": "^7.3.2",
+    "@mantine/notifications": "^7.17.8",
     "@tabler/icons-react": "^2.44.0",
     "@tanstack/react-query": "^5.14.2",
     "react": "^18.2.0",
