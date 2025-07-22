@@ -53,28 +53,35 @@ const HeroSection = () => {
 			style={{
 				background: 'linear-gradient(135deg, #1a1b23 0%, #2d3748 100%)',
 				borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-				paddingTop: '40px',
-				paddingBottom: '60px',
+				paddingTop: '20px',
+				paddingBottom: '40px',
 				width: '100%',
 			}}>
 			<Container
 				size='xl'
-				style={{ maxWidth: '100%', paddingLeft: '40px', paddingRight: '40px' }}>
-				<Stack spacing='xl' align='center'>
-					{/* Top Title Button - Like Viral Tool */}
-					<Group
+				style={{
+					maxWidth: '100%',
+					paddingLeft: { base: '20px', md: '40px' },
+					paddingRight: { base: '20px', md: '40px' },
+				}}>
+				<Stack spacing={{ base: 'md', md: 'xl' }} align='center'>
+					{/* Top Title Button - Mobile Optimized */}
+					<Flex
+						direction={{ base: 'column', sm: 'row' }}
 						justify='space-between'
-						style={{ width: '100%', marginBottom: '20px' }}>
+						align='center'
+						gap='md'
+						style={{ width: '100%', marginBottom: '10px' }}>
 						<Badge
-							size='lg'
+							size={{ base: 'md', md: 'lg' }}
 							variant='filled'
 							color='dark'
 							style={{
 								background: 'rgba(255, 255, 255, 0.1)',
 								color: 'white',
-								padding: '8px 16px',
+								padding: { base: '6px 12px', md: '8px 16px' },
 								borderRadius: '20px',
-								fontSize: '14px',
+								fontSize: { base: '12px', md: '14px' },
 								fontWeight: 600,
 								border: '1px solid rgba(255, 255, 255, 0.2)',
 							}}>
@@ -86,23 +93,22 @@ const HeroSection = () => {
 							<ActionIcon
 								variant='light'
 								color='gray'
-								size='lg'
+								size={{ base: 'md', md: 'lg' }}
 								onClick={handleViewGitHub}
 								style={{
 									background: 'rgba(255, 255, 255, 0.1)',
 									color: 'white',
 									border: '1px solid rgba(255, 255, 255, 0.2)',
 								}}>
-								<IconBrandGithub size={18} />
+								<IconBrandGithub size={{ base: 16, md: 18 }} />
 							</ActionIcon>
 						</Tooltip>
-					</Group>
+					</Flex>
 
-					{/* Main Headline */}
+					{/* Main Headline - Mobile Responsive */}
 					<Stack spacing='md' align='center' style={{ textAlign: 'center' }}>
 						<Title
 							order={1}
-							size='3.5rem'
 							weight={900}
 							style={{
 								background: 'linear-gradient(45deg, #ffffff, #a0aec0)',
@@ -111,29 +117,42 @@ const HeroSection = () => {
 								WebkitTextFillColor: 'transparent',
 								lineHeight: 1.1,
 								maxWidth: '900px',
+								padding: { base: '0 10px', md: '0' },
 							}}>
 							Never Miss a Crypto Opportunity Again
 						</Title>
 
 						<Text
-							size='xl'
+							size={{ base: 'md', md: 'xl' }}
 							color='dimmed'
-							style={{ maxWidth: '700px', lineHeight: 1.6 }}>
+							style={{
+								maxWidth: '700px',
+								lineHeight: 1.6,
+								padding: { base: '0 10px', md: '0' },
+							}}>
 							Get instant browser notifications when Bitcoin, Ethereum, or any
-							crypto hits your price targets. Built with React + LunarCrush API
-							for real-time accuracy.
+							crypto hits your price targets. Built LunarCrush API for real-time
+							accuracy.
 						</Text>
 					</Stack>
 
-					{/* Live Data Cards */}
-					<Group spacing='lg' style={{ marginTop: '20px' }}>
+					{/* Live Data Cards - Mobile Stack */}
+					<Flex
+						direction={{ base: 'column', sm: 'row' }}
+						gap={{ base: 'md', md: 'lg' }}
+						style={{
+							marginTop: '20px',
+							width: '100%',
+							justifyContent: 'center',
+						}}>
 						<Card
 							padding='md'
 							radius='md'
 							style={{
 								background: 'rgba(255, 255, 255, 0.05)',
 								border: '1px solid rgba(255, 255, 255, 0.1)',
-								minWidth: '200px',
+								minWidth: { base: 'auto', sm: '200px' },
+								width: { base: '100%', sm: 'auto' },
 							}}>
 							<Flex direction='column' align='center'>
 								<Group spacing='xs' mb='xs'>
@@ -151,7 +170,10 @@ const HeroSection = () => {
 									<Loader size='sm' />
 								) : (
 									<>
-										<Text size='lg' weight={700} color='white'>
+										<Text
+											size={{ base: 'md', md: 'lg' }}
+											weight={700}
+											color='white'>
 											<NumberFormatter
 												value={bitcoin.price}
 												prefix='$'
@@ -177,7 +199,8 @@ const HeroSection = () => {
 							style={{
 								background: 'rgba(255, 255, 255, 0.05)',
 								border: '1px solid rgba(255, 255, 255, 0.1)',
-								minWidth: '200px',
+								minWidth: { base: 'auto', sm: '200px' },
+								width: { base: '100%', sm: 'auto' },
 							}}>
 							<Flex direction='column' align='center'>
 								<Group spacing='xs' mb='xs'>
@@ -195,7 +218,10 @@ const HeroSection = () => {
 									<Loader size='sm' />
 								) : (
 									<>
-										<Text size='lg' weight={700} color='white'>
+										<Text
+											size={{ base: 'md', md: 'lg' }}
+											weight={700}
+											color='white'>
 											<NumberFormatter
 												value={ethereum.price}
 												prefix='$'
@@ -222,7 +248,8 @@ const HeroSection = () => {
 								style={{
 									background: 'rgba(34, 197, 94, 0.1)',
 									border: '1px solid rgba(34, 197, 94, 0.2)',
-									minWidth: '200px',
+									minWidth: { base: 'auto', sm: '200px' },
+									width: { base: '100%', sm: 'auto' },
 								}}>
 								<Flex direction='column' align='center'>
 									<Group spacing='xs' mb='xs'>
@@ -231,7 +258,10 @@ const HeroSection = () => {
 											Active Alerts
 										</Text>
 									</Group>
-									<Text size='lg' weight={700} color='#22c55e'>
+									<Text
+										size={{ base: 'md', md: 'lg' }}
+										weight={700}
+										color='#22c55e'>
 										{activeAlertsCount}
 									</Text>
 									<Text size='sm' color='dimmed'>
@@ -240,29 +270,43 @@ const HeroSection = () => {
 								</Flex>
 							</Card>
 						)}
-					</Group>
+					</Flex>
 
-					{/* Call to Action */}
-					<Group spacing='md' style={{ marginTop: '30px' }}>
+					{/* Call to Action - Mobile Stack */}
+					<Flex
+						direction={{ base: 'column', sm: 'row' }}
+						gap='md'
+						style={{ marginTop: '30px', width: { base: '100%', sm: 'auto' } }}>
 						<Button
-							size='lg'
+							size='md'
 							leftSection={<IconBell size={20} />}
 							variant='gradient'
 							gradient={{ from: 'blue', to: 'cyan' }}
-							onClick={handleCreateAlert}>
+							onClick={handleCreateAlert}
+							fullWidth={{ base: true, sm: false }}>
 							Create Your First Alert
 						</Button>
-					</Group>
+					</Flex>
 
-					{/* Trust Indicators */}
-					<Group spacing='lg' style={{ marginTop: '20px' }}>
-						<Badge variant='outline' color='gray' size='md'>
+					{/* Trust Indicators - Mobile Wrap */}
+					<Flex
+						wrap='wrap'
+						gap={{ base: 'xs', md: 'lg' }}
+						justify='center'
+						style={{ marginTop: '20px' }}>
+						<Badge
+							variant='outline'
+							color='gray'
+							size={{ base: 'sm', md: 'md' }}>
 							⚡ Real-time LunarCrush API
 						</Badge>
-						<Badge variant='outline' color='gray' size='md'>
+						<Badge
+							variant='outline'
+							color='gray'
+							size={{ base: 'sm', md: 'md' }}>
 							🔔 Browser Notifications
 						</Badge>
-					</Group>
+					</Flex>
 				</Stack>
 			</Container>
 		</Box>

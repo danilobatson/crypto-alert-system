@@ -4,6 +4,7 @@ import { Box } from '@mantine/core';
 // Components
 import HeroSection from './components/layout/HeroSection';
 import DashboardGrid from './components/dashboard/DashboardGrid';
+import Footer from './components/layout/Footer';
 import AlertModal from './components/alerts/AlertModal';
 import NotificationBanner from './components/ui/NotificationBanner';
 
@@ -36,6 +37,9 @@ function App() {
         <Box style={{ paddingTop: '40px', paddingBottom: '40px', width: '100%' }}>
           <DashboardGrid />
         </Box>
+
+        {/* Footer */}
+        <Footer />
       </Box>
 
       {/* Alert Modal - Rendered globally */}

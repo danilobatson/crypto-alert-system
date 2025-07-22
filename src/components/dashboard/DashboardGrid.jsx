@@ -17,6 +17,7 @@ import {
 	Progress,
 	Container,
 	Title,
+	Flex,
 } from '@mantine/core';
 import {
 	IconSettings,
@@ -67,29 +68,12 @@ const DashboardGrid = () => {
 		hasError,
 	} = useMultipleCrypto(['bitcoin', 'ethereum']);
 
-	// Updated: Polling-based status instead of WebSocket
 	const isConnected = !hasError && Object.keys(cryptoData).length > 0;
 	const isPollingActive = isRealTimeActive;
 	const activeDataCount = Object.values(cryptoData).filter(
 		(data) => data && data.price
 	).length;
 	const healthScore = isConnected ? 100 : 0;
-	// Calculate data freshness for all assets
-	const getOverallFreshness = () => {
-		const ages = Object.values(cryptoData)
-			.filter((data) => data?.lastUpdated)
-			.map(
-				(data) => (Date.now() - new Date(data.lastUpdated).getTime()) / 60000
-			);
-
-		if (ages.length === 0) return 'unknown';
-		const avgAge = ages.reduce((a, b) => a + b, 0) / ages.length;
-
-		if (avgAge < 1) return 'fresh';
-		if (avgAge < 3) return 'recent';
-		if (avgAge < 5) return 'aging';
-		return 'stale';
-	};
 
 	const handleTogglePolling = () => {
 		if (isPollingActive) {
@@ -138,24 +122,37 @@ const DashboardGrid = () => {
 			}}>
 			<Container
 				size='xl'
-				style={{ maxWidth: '100%', paddingLeft: '40px', paddingRight: '40px' }}>
-				<Stack spacing='xl'>
-					{/* Section Title */}
-					<Group justify='space-between' align='center'>
-						<Stack spacing='xs'>
+				style={{
+					maxWidth: '100%',
+					paddingLeft: { base: '20px', md: '40px' },
+					paddingRight: { base: '20px', md: '40px' },
+				}}>
+				<Stack spacing={{ base: 'md', md: 'xl' }}>
+					{/* Section Title - Mobile Responsive */}
+					<Flex
+						direction={{ base: 'column', md: 'row' }}
+						justify='space-between'
+						align={{ base: 'center', md: 'flex-start' }}
+						gap='md'>
+						<Stack spacing='xs' align={{ base: 'center', md: 'flex-start' }}>
 							<Title
 								order={2}
-								size='2rem'
 								style={{
 									color: 'white',
 									fontWeight: 700,
+									textAlign: { base: 'center', md: 'left' },
 								}}>
 								Live Dashboard
 							</Title>
 						</Stack>
 
-						{/* Controls */}
-						<Group spacing='md'>
+						{/* Controls - Mobile Stack */}
+						<Flex
+							direction={{ base: 'row', md: 'row' }}
+							gap='md'
+							wrap='wrap'
+							justify='center'
+							style={{ alignItems: 'center' }}>
 							<Tooltip
 								label={
 									isPollingActive ? 'Pause auto-refresh' : 'Start auto-refresh'
@@ -182,15 +179,16 @@ const DashboardGrid = () => {
 									<IconRefresh size={18} />
 								</ActionIcon>
 							</Tooltip>
-						</Group>
-					</Group>
+						</Flex>
+					</Flex>
 
-					{/* Status Cards */}
+					{/* Status Cards - Mobile Responsive Grid */}
 					<Grid>
-						<Grid.Col span={{ base: 12, md: 3 }} />
-						<Grid.Col span={{ base: 12, md: 3 }}>
+						<Grid.Col span={{ base: 6, sm: 3 }} />
+
+						<Grid.Col span={{ base: 6, sm: 3 }}>
 							<Card
-								padding='lg'
+								padding={{ base: 'sm', md: 'lg' }}
 								radius='md'
 								style={{
 									background: 'rgba(255, 255, 255, 0.05)',
@@ -199,24 +197,27 @@ const DashboardGrid = () => {
 								}}>
 								<Stack spacing='xs'>
 									<Group justify='space-between'>
-										<Text size='sm' color='dimmed'>
-											Active Alerts
+										<Text size={{ base: 'xs', md: 'sm' }} color='dimmed'>
+											Alerts
 										</Text>
 										<IconBell size={16} color='#f59e0b' />
 									</Group>
-									<Text size='lg' weight={700} color='orange'>
+									<Text
+										size={{ base: 'sm', md: 'lg' }}
+										weight={700}
+										color='orange'>
 										{getActiveAlerts().length}
 									</Text>
 									<Text size='xs' color='dimmed'>
-										Monitoring prices
+										Active
 									</Text>
 								</Stack>
 							</Card>
 						</Grid.Col>
 
-						<Grid.Col span={{ base: 12, md: 3 }}>
+						<Grid.Col span={{ base: 6, sm: 3 }}>
 							<Card
-								padding='lg'
+								padding={{ base: 'sm', md: 'lg' }}
 								radius='md'
 								style={{
 									background: 'rgba(255, 255, 255, 0.05)',
@@ -225,7 +226,7 @@ const DashboardGrid = () => {
 								}}>
 								<Stack spacing='xs'>
 									<Group justify='space-between'>
-										<Text size='sm' color='dimmed'>
+										<Text size={{ base: 'xs', md: 'sm' }} color='dimmed'>
 											Auto-Refresh
 										</Text>
 										<IconCloudDownload
@@ -234,7 +235,7 @@ const DashboardGrid = () => {
 										/>
 									</Group>
 									<Text
-										size='lg'
+										size={{ base: 'sm', md: 'lg' }}
 										weight={700}
 										color={isPollingActive ? 'green' : 'gray'}>
 										{isPollingActive ? 'Active' : 'Paused'}
@@ -245,31 +246,31 @@ const DashboardGrid = () => {
 								</Stack>
 							</Card>
 						</Grid.Col>
-						<Grid.Col span={{ base: 12, md: 3 }} />
 					</Grid>
 
-					{/* Main Content Tabs */}
+					{/* Main Content Tabs - Mobile Friendly */}
 					<Tabs
 						value={activeTab}
 						onChange={setActiveTab}
-						style={{
-							'.mantine-Tabs-tab': {
-								color: 'rgba(255, 255, 255, 0.7)',
-								borderColor: 'rgba(255, 255, 255, 0.1)',
-							},
-						}}>
-						<Tabs.List>
+						variant='outline'
+						orientation={{ base: 'horizontal', md: 'horizontal' }}>
+						<Tabs.List justify={{ base: 'center', md: 'flex-start' }}>
 							<Tabs.Tab
 								value='overview'
-								leftSection={<IconLayoutDashboard size={16} />}>
+								leftSection={<IconLayoutDashboard size={16} />}
+								style={{ fontSize: { base: '14px', md: '16px' } }}>
 								Overview
 							</Tabs.Tab>
 							<Tabs.Tab
 								value='charts'
-								leftSection={<IconChartLine size={16} />}>
+								leftSection={<IconChartLine size={16} />}
+								style={{ fontSize: { base: '14px', md: '16px' } }}>
 								Charts
 							</Tabs.Tab>
-							<Tabs.Tab value='alerts' leftSection={<IconBell size={16} />}>
+							<Tabs.Tab
+								value='alerts'
+								leftSection={<IconBell size={16} />}
+								style={{ fontSize: { base: '14px', md: '16px' } }}>
 								Alerts
 							</Tabs.Tab>
 						</Tabs.List>
